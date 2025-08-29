@@ -11,7 +11,7 @@ export default function TopBar({ user }: { user?: { name: string; email: string 
           {user ? (
             <form action="/api/logout" method="post">
               <span className="hidden sm:inline text-slate-300 mr-2">👤 {user.name}</span>
-              <button className="px-3 py-1.5 rounded-md bg-black/20">Logout</button>
+              <button className="btn btn-muted">Logout</button>
             </form>
           ) : (
             <Link href="/login" className="px-3 py-1.5 rounded-md bg-black/20">Login</Link>
