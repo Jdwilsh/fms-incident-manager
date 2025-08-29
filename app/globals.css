@@ -4,34 +4,23 @@
 /* Your FMS design tokens (Tailwind v4 uses @theme). 
    These names become utilities like bg-brand-500, text-brand-600, etc. */
 @theme {
-  /* colors */
-  --color-brand-50:  #eef8f5;
-  --color-brand-100: #d6efe9;
-  --color-brand-200: #b2e0d4;
-  --color-brand-300: #86cfbd;
-  --color-brand-400: #4fb59c;
-  --color-brand-500: #249f86;
-  --color-brand-600: #1a826e;
-  --color-brand-700: #15685a;
-  --color-brand-800: #0f4a40;
-  --color-brand-900: #0a352e;
+  /* Brand */
+  --color-brand-600: #2E6BE6;
+  --color-brand-700: #2356B6;
 
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error:   #dc2626;
-  --color-info:    #2563eb;
+  /* Neutrals */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f6f8fb;
+  --color-border: #e4e7ec;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
 
-  /* neutrals */
-  --color-bg:   #0b0f10;
-  --color-card: #0f1416;
-  --color-text: #e6edf3;
-  --color-muted:#94a3b8;
-
-  /* radius tokens map to rounded-sm/md/lg/xl classes (v4) */
-  --radius-sm: .375rem;
+  /* Radius & shadow (optional now) */
+  --radius-sm: .25rem;
   --radius-md: .5rem;
   --radius-lg: .75rem;
   --radius-xl: 1rem;
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 /* Optional: normalize form elements (if you add the forms plugin later) */

@@ -12,7 +12,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body>
+      <body className="bg-surface-muted text-text font-sans">
         <TopBar user={user || undefined} />
         <main id="main" className="mx-auto max-w-6xl p-4">{children}</main>
       </body>
