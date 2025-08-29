@@ -1,0 +1,137 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  INCIDENT_MANAGER
+  VIEW_ONLY
+}
+
+enum IncidentStatus {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  role         Role     @default(VIEW_ONLY)
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  incidentsAssigned Incident[]      @relation("AssignedTo")
+  auditEntries      AuditEntry[]
+  timelineEvents    TimelineEvent[]
+  filesUploaded     IncidentFile[]  @relation("UploadedBy")
+}
+
+model IncidentType {
+  id          String             @id @default(cuid())
+  slug        String             @unique
+  name        String
+  description String?
+  incidents   Incident[]
+  rules       NotificationRule[]
+}
+
+model Incident {
+  id            String         @id @default(cuid())
+  typeId        String
+  status        IncidentStatus @default(OPEN)
+  title         String
+  description   String
+  reporterName  String?
+  reporterEmail String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  closedAt      DateTime?
+  outcome       String?
+
+  assignedToId String?
+  assignedTo   User?   @relation("AssignedTo", fields: [assignedToId], references: [id])
+
+  type       IncidentType    @relation(fields: [typeId], references: [id])
+  files      IncidentFile[]
+  audits     AuditEntry[]
+  statements Statement[]
+  timeline   TimelineEvent[]
+
+  @@index([status, createdAt])
+  @@index([assignedToId])
+  @@index([typeId])
+}
+
+model IncidentFile {
+  id           String   @id @default(cuid())
+  incidentId   String
+  filename     String
+  mimeType     String
+  size         Int
+  storagePath  String
+  uploadedById String?
+  uploadedAt   DateTime @default(now())
+
+  incident   Incident @relation(fields: [incidentId], references: [id])
+  uploadedBy User?    @relation("UploadedBy", fields: [uploadedById], references: [id])
+}
+
+model AuditEntry {
+  id         String   @id @default(cuid())
+  incidentId String?
+  actorId    String?
+  action     String
+  meta       Json?
+  createdAt  DateTime @default(now())
+
+  incident Incident? @relation(fields: [incidentId], references: [id])
+  actor    User?     @relation(fields: [actorId], references: [id])
+
+  @@index([incidentId])
+  @@index([actorId])
+}
+
+model Statement {
+  id         String   @id @default(cuid())
+  incidentId String
+  authorName String
+  text       String
+  createdAt  DateTime @default(now())
+
+  incident Incident @relation(fields: [incidentId], references: [id])
+
+  @@index([incidentId])
+}
+
+model TimelineEvent {
+  id          String   @id @default(cuid())
+  incidentId  String
+  label       String
+  at          DateTime
+  createdById String?
+
+  incident  Incident @relation(fields: [incidentId], references: [id])
+  createdBy User?    @relation(fields: [createdById], references: [id])
+
+  @@index([incidentId])
+  @@index([createdById])
+}
+
+model NotificationRule {
+  id             String  @id @default(cuid())
+  incidentTypeId String?
+  recipients     String // comma-separated emails
+
+  incidentType IncidentType? @relation(fields: [incidentTypeId], references: [id])
+
+  @@index([incidentTypeId])
+}

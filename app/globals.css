@@ -1,0 +1,41 @@
+/* app/globals.css — Tailwind v4 style */
+@import "tailwindcss";
+
+/* Your FMS design tokens (Tailwind v4 uses @theme). 
+   These names become utilities like bg-brand-500, text-brand-600, etc. */
+@theme {
+  /* colors */
+  --color-brand-50:  #eef8f5;
+  --color-brand-100: #d6efe9;
+  --color-brand-200: #b2e0d4;
+  --color-brand-300: #86cfbd;
+  --color-brand-400: #4fb59c;
+  --color-brand-500: #249f86;
+  --color-brand-600: #1a826e;
+  --color-brand-700: #15685a;
+  --color-brand-800: #0f4a40;
+  --color-brand-900: #0a352e;
+
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error:   #dc2626;
+  --color-info:    #2563eb;
+
+  /* neutrals */
+  --color-bg:   #0b0f10;
+  --color-card: #0f1416;
+  --color-text: #e6edf3;
+  --color-muted:#94a3b8;
+
+  /* radius tokens map to rounded-sm/md/lg/xl classes (v4) */
+  --radius-sm: .375rem;
+  --radius-md: .5rem;
+  --radius-lg: .75rem;
+  --radius-xl: 1rem;
+}
+
+/* Optional: normalize form elements (if you add the forms plugin later) */
+/* @plugin "@tailwindcss/forms"; */
+
+html, body { height: 100%; }
+body { background: var(--color-bg); color: var(--color-text); }
