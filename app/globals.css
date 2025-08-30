@@ -1,31 +1,19 @@
-/* app/globals.css — Tailwind v4 style */
 @import "tailwindcss";
 
-/* Your FMS design tokens (Tailwind v4 uses @theme). */
+/* Design tokens (safe) */
 @theme {
-  /* Brand (slightly deeper so buttons pop) */
   --color-brand-600: #2a5bd7;
   --color-brand-700: #1e47ae;
 
-  /* Neutrals (background a touch darker for contrast) */
-  --color-surface-muted: #f3f4f6; /* was #f6f8fb */
-  --color-border: #dfe3ea;        /* a hair darker for visible dividers */
-  --color-text: #111827;          /* slate-900-ish for stronger body text */
-  --color-text-muted: #4b5563;    /* slate-600-ish */
-}
+  --color-surface: #ffffff;
+  --color-surface-muted: #f3f4f6;
+  --color-border: #dfe3ea;
 
-/* Minimal button primitives */
-.btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium
-         border border-transparent shadow-[var(--shadow-card)]
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
-}
-.btn-primary {
-  @apply bg-brand-600 text-white hover:bg-brand-700 focus-visible:ring-brand-600;
-}
-.btn-muted {
-  @apply bg-white text-text border-border hover:bg-surface focus-visible:ring-brand-600;
-}
+  --color-text: #111827;
+  --color-text-muted: #4b5563;
 
-html, body { height: 100%; }
-body { background: var(--color-bg); color: var(--color-text); }
+  --radius-sm: .25rem;
+  --radius-md: .5rem;
+  --radius-lg: .75rem;
+  --radius-xl: 1rem;
+}
